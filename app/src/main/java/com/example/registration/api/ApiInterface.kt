@@ -1,16 +1,19 @@
 package com.example.registration.api
 
-import com.example.registration.models.LoginRequest
-import com.example.registration.models.LoginResponse
-import com.example.registration.models.RegistrationRequest
-import com.example.registration.models.RegistrationResponse
-import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.POST
+import com.example.registration.models.*
+import retrofit2.Response
+import retrofit2.http.*
 
 interface ApiInterface {
     @POST("students/register")
-    fun registerStudent(@Body registrationRequest: RegistrationRequest):Call<RegistrationResponse>
+    suspend fun registerStudent(@Body registrationRequest: RegistrationRequest):Response<RegistrationResponse>
     @POST("students/login")
-    fun login(@Body loginRequest: LoginRequest):Call<LoginResponse>
-}
+    suspend fun login(@Body loginRequest: LoginRequest):Response<LoginResponse>
+    @GET("/courses")
+    suspend fun  course(@Header("Authorization") token: String):Response<List<CourseResponse>>
+
+
+
+
+
+    }
