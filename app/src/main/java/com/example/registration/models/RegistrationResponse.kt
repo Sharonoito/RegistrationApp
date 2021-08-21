@@ -10,6 +10,5 @@ data class RegistrationResponse(
     var nationality:String,
     var password:String,
     @SerializedName("student_id")var studentId:String
-
 )
 

@@ -8,15 +8,17 @@ import com.example.registration.repository.CourseRepository
 import kotlinx.coroutines.launch
 
 class CourseViewModel:ViewModel() {
-    var courseLiveData= MutableLiveData<CourseResponse>()
+    var courseLiveData= MutableLiveData<List<CourseResponse>>()
     var courseFailedLiveData= MutableLiveData<String>()
     var courseRepository= CourseRepository()
 
-    fun courseResponse() {
+    fun getCourses(accessToken:String) {
         viewModelScope.launch{
-            var response=courseRepository.courses()
+            var response=courseRepository.courses(accessToken)
             if(response.isSuccessful){
+
                 courseLiveData.postValue(response.body())
+
             }
             else{
                 courseFailedLiveData.postValue(response.errorBody()?.string())
@@ -25,9 +27,9 @@ class CourseViewModel:ViewModel() {
     }
 }
 
-private fun <T> MutableLiveData<T>.postValue(body: List<T>?) {
 
-}
+
+
 
 
 
